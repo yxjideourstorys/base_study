@@ -29,16 +29,16 @@ import java.util.stream.Stream;
  *            sorted() --- 自然排序(compareable 里的 compareTo方法)
  *            sorted(Comparator com) ---定制排序(comparator)
  */
-public class Stream_MidOpt {
+public class Stream_2_MidOpt {
 
     static List<Employee> emps = Arrays.asList(
-            new Employee("小红", 18, 2000),
-            new Employee("小拍", 19, 1000),
-            new Employee("小白", 20, 8200),
-            new Employee("小白", 20, 8100),
-            new Employee("小黑", 28, 7000),
-            new Employee("小黑", 22, 6500),
-            new Employee("小东", 17, 6000)
+            new Employee("小红", 18, 2000.0),
+            new Employee("小拍", 19, 1000.0),
+            new Employee("小白", 20, 8200.0),
+            new Employee("小白", 20, 8100.0),
+            new Employee("小黑", 28, 7000.0),
+            new Employee("小黑", 22, 6500.0),
+            new Employee("小东", 17, 6000.0)
     );
 
     /**
@@ -118,7 +118,7 @@ public class Stream_MidOpt {
     public void mapTest(){
         // 使用map 完成需求
         List<String> list = Arrays.asList("aaa", "bbb", "ccc", "ddd", "eee");
-        Stream<Stream<Character>> stream = list.stream().map(Stream_MidOpt::filterCharacter);
+        Stream<Stream<Character>> stream = list.stream().map(Stream_2_MidOpt::filterCharacter);
         // { {a,a,a},{b,b,b}... }
         stream.forEach((x) -> x.forEach(System.out::println));
     }
@@ -134,7 +134,7 @@ public class Stream_MidOpt {
     public void streamFlatMapTest(){
         // 使用flatMap 完成需求
         List<String> list = Arrays.asList("aaa", "bbb", "ccc", "ddd", "eee");
-        list.stream().flatMap(Stream_MidOpt::filterCharacter).forEach(System.out::println);
+        list.stream().flatMap(Stream_2_MidOpt::filterCharacter).forEach(System.out::println);
     }
 
 

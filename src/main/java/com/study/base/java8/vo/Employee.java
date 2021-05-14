@@ -11,7 +11,7 @@ public class Employee implements Serializable {
 
     private Integer age;
 
-    private Integer salary;
+    private Double salary;
 
     private Status status;
 
@@ -26,13 +26,13 @@ public class Employee implements Serializable {
         this.age = age;
     }
 
-    public Employee(String name, Integer age, Integer salary){
+    public Employee(String name, Integer age, Double salary){
         this.name = name;
         this.age = age;
         this.salary = salary;
     }
 
-    public Employee(String name, Integer age, Integer salary, Status status) {
+    public Employee(String name, Integer age, Double salary, Status status) {
         this.name = name;
         this.age = age;
         this.salary = salary;
