@@ -1,5 +1,7 @@
 package com.study.base.java8.lambda;
 
+import com.study.base.java8.lambda.i.MyFun;
+
 import java.util.Comparator;
 import java.util.function.Consumer;
 
@@ -29,8 +31,11 @@ import java.util.function.Consumer;
  *      语法格式六：Lambda 表达式的参数列表的数据类型可以省略不写，因为JVM编译器可以通过上下文推断出数据类型，即“类型推断”。
  *          (Integer x, Integer y) -> Integer.compare(x, y);    <==>    (x, y) -> Integer.compare(x, y);
  *
+ * 二、Lambda 表达式需要“函数式接口”的支持
+ *       函数式接口：接口中只有一个抽象方法的接口，称为函数式接口。可以使用注解 @FunctionalInterface 修饰，
+ *                  可以检查是否是函数式接口(接口中有多个方法会编译报错)
  */
-public class lambda_1 {
+public class Lambda_1_base {
 
     /**
      * 语法一
@@ -76,6 +81,18 @@ public class lambda_1 {
 
         // 语法六
         Comparator<Integer> com2 = (Integer x, Integer y) -> Integer.compare(x, y);
+    }
+
+    /**
+     * 函数式接口
+     */
+    public void lambdaTest4(){
+        Integer result = operation(100, x -> x * 2 + 1);
+        System.out.println("result：" + result);
+    }
+
+    private static Integer operation(Integer num, MyFun myFun){
+        return myFun.getValue(num);
     }
 
 

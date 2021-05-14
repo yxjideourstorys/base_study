@@ -2,7 +2,7 @@ package com.study.base.java8.lambda;
 
 import com.study.base.java8.lambda.i.Exercise2;
 import com.study.base.java8.lambda.i.Exercise3;
-import com.study.base.java8.lambda.vo.Employee;
+import com.study.base.java8.vo.Employee;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;

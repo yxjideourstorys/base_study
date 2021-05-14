@@ -25,7 +25,7 @@ import java.util.function.Supplier;
  *    四、Predicate<T> ：断言型接口
  *          boolean test(T t);
  */
-public class lambda_3 {
+public class Lambda_2_CoreFunction {
 
     /**
      * 消费型接口
