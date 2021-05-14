@@ -1,10 +1,12 @@
 package com.study.base.java8.stream;
 
+import com.study.base.java8.vo.Employee;
 import com.study.base.java8.vo.Trader;
 import com.study.base.java8.vo.Transaction;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *  1、给定一个数字列表，如何返回一个由每个数的平方构成的列表呢？
@@ -23,19 +25,38 @@ import java.util.List;
  */
 public class Stream_Exercise {
 
+
+
     /**
      * 1、给定一个数字列表，如何返回一个由每个数的平方构成的列表呢？
      *       给定：【1, 2, 3, 4, 5】 应返回：【1, 4, 9, 16, 25】
      */
     public void exercise1(){
-
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> results = list.stream()
+                .map(x -> x * x)
+                .collect(Collectors.toList());
+        results.forEach(System.out::println);
     }
+
 
     /**
      * 2、怎么用 map 和 reduce 方法来数一数流中有多少个 Employee呢？
      */
+    static List<Employee> emps = Arrays.asList(
+            new Employee("小红", 18, 2000.0, Employee.Status.FREE),
+            new Employee("小拍", 19, 1000.0, Employee.Status.VOCATION),
+            new Employee("小白", 20, 8200.0, Employee.Status.BUSY),
+            new Employee("小白", 20, 8100.0, Employee.Status.FREE),
+            new Employee("小黑", 28, 7000.0, Employee.Status.BUSY),
+            new Employee("小黑", 22, 6500.0, Employee.Status.VOCATION),
+            new Employee("小东", 17, 6000.0, Employee.Status.BUSY)
+    );
     public void exercise2(){
-
+        Integer sum = emps.stream()
+                .map(x -> 1)
+                .reduce(0, Integer::sum);
+        System.out.println(sum);
     }
 
 
