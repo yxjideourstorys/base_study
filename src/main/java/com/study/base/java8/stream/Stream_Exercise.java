@@ -4,9 +4,9 @@ import com.study.base.java8.vo.Employee;
 import com.study.base.java8.vo.Trader;
 import com.study.base.java8.vo.Transaction;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *  1、给定一个数字列表，如何返回一个由每个数的平方构成的列表呢？
@@ -70,14 +70,13 @@ public class Stream_Exercise {
      *    g.所有交易中，最高的交易额是多少？
      *    h.找到交易额最小的交易
      */
-    List<Transaction> transactions = null;
     public void exercise3(){
         Trader raoul = new Trader("raoul", "Cambridge");
         Trader mario = new Trader("mario", "Milan");
         Trader alan = new Trader("alan", "Cambridge");
         Trader brian = new Trader("brian", "Cambridge");
 
-        transactions = Arrays.asList(
+        List<Transaction> transactions = Arrays.asList(
                 new Transaction(brian, 2011, 300),
                 new Transaction(raoul, 2012, 1000),
                 new Transaction(raoul, 2011, 400),
@@ -85,6 +84,109 @@ public class Stream_Exercise {
                 new Transaction(mario, 2012, 700),
                 new Transaction(alan, 2012, 950)
         );
-    }
 
+        List<Trader> traders = new ArrayList<>();
+        traders.add(raoul);
+        traders.add(mario);
+        traders.add(alan);
+        traders.add(brian);
+
+        // a.找出2011年发生的所有交易，并按交易额排序(从低到高)
+        List<Transaction> a = transactions.stream()
+                .filter(x -> x.getYear() == 2011)
+                .sorted((x, y) -> x.getValue() - y.getValue())
+                .collect(Collectors.toList());
+        a.forEach(System.out::println);
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        // b.交易员都在哪些不同的城市工作过？
+        List<String> b = traders.stream()
+                .map(Trader::getCity)
+                .distinct()
+                .collect(Collectors.toList());
+        b.forEach(System.out::println);
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        // c.查找所有来自剑桥的交易员，并按姓名排序
+        List<Trader> c = traders.stream()
+                .filter(x -> "Cambridge".equals(x.getCity()))
+                .sorted((x, y) -> x.getName().compareTo(y.getName()))
+                .collect(Collectors.toList());
+        c.forEach(System.out::println);
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        // d.返回所有交易员的姓名字符串，按字母顺序排序
+        List<Character> d = traders.stream()
+                .map(Trader::getName)
+                .flatMap(Stream_Exercise::exchangeChar)
+                .sorted(Character::compareTo).collect(Collectors.toList());
+        d.forEach(System.out::println);
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        // e.有没有交易员是在米兰工作的？
+        boolean e = traders.stream()
+                .map(Trader::getCity)
+                .anyMatch("Milan"::equals);
+        System.out.println(e);
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        // f.打印生活在剑桥的交易员的所有交易额
+        List<String> traderList = traders.stream()
+                .filter(x -> "Cambridge".equals(x.getCity()))
+                .map(Trader::getName)
+                .collect(Collectors.toList());
+        Integer f = transactions.stream()
+                .filter(x -> traderList.contains(x.getTrader().getName()))
+                .map(Transaction::getValue)
+                .reduce(0, Integer::sum);
+        System.out.println(f);
+        // 优化1
+        Integer f2 = transactions.stream()
+                .filter(x -> (traders.stream()
+                        .filter(y -> "Cambridge".equals(y.getCity()))
+                        .map(Trader::getName)
+                        .collect(Collectors.toList()))
+                        .contains(x.getTrader().getName()))
+                .map(Transaction::getValue)
+                .reduce(0, Integer::sum);
+        System.out.println(f2);
+        // 优化2
+        List<String> traderList2 = traders.stream()
+                .filter(x -> "Cambridge".equals(x.getCity()))
+                .map(Trader::getName)
+                .collect(Collectors.toList());
+        Integer f3 = transactions.stream()
+                .filter(x -> traderList.contains(x.getTrader().getName()))
+        // .collect(Collectors.summingInt(Transaction::getValue));
+                .mapToInt(Transaction::getValue).sum();
+        System.out.println(f3);
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        // g.所有交易中，最高的交易额是多少？
+        Optional<Integer> g = transactions.stream()
+                .map(Transaction::getValue)
+                .max(Integer::compare);
+        System.out.println(g.get());
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        // h.找到交易额最小的交易
+        Optional<Transaction> h = transactions.stream()
+                .min((x, y) -> Integer.compare(x.getValue(), y.getValue()));
+        System.out.println(h.get());
+    }
+    private static Stream<Character> exchangeChar(String str){
+        List<Character> list = new ArrayList<>();
+
+        for (Character chars: str.toCharArray()){
+            list.add(chars);
+        }
+        return list.stream();
+    }
 }
