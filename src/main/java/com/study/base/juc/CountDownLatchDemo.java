@@ -2,15 +2,16 @@ package com.study.base.juc;
 
 import java.util.concurrent.CountDownLatch;
 
-public class CountDownLatchStudy {
+public class CountDownLatchDemo {
+
+    private static final int PERSON_NUM = 6;
+
 
     public static void main(String[] args) {
 
-        int personNum = 6;
+        CountDownLatch countDownLatch = new CountDownLatch(PERSON_NUM);
 
-        CountDownLatch countDownLatch = new CountDownLatch(personNum);
-
-        for (int i = 1; i <= personNum; i++) {
+        for (int i = 1; i <= PERSON_NUM; i++) {
             new Thread(() -> {
                 System.out.println("第{" + Thread.currentThread().getName() + "}个同学出门回家了");
                 // 计数减1
