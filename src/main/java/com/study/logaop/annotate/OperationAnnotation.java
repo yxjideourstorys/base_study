@@ -5,6 +5,7 @@ import java.lang.annotation.*;
 
 /**
  * AOP日志记录 自定义注解类
+ * Author 隋伟东
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
