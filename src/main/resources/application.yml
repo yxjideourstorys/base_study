@@ -2,25 +2,31 @@ server:
   port: 8080
 
 spring:
+  datasource:
+    url: jdbc:mysql://81.69.6.206:3306/dggmall_pms?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: youis218945
+
   redis:
-    # RedisÊı¾İ¿âË÷Òı£¨Ä¬ÈÏÎª0£©
+    # Redisæ•°æ®åº“ç´¢å¼•ï¼ˆé»˜è®¤ä¸º0ï¼‰
     database: 0
-    # Redis·şÎñÆ÷µØÖ·
+    # RedisæœåŠ¡å™¨åœ°å€
     host: 81.69.6.206
-    # Redis·şÎñÆ÷Á¬½Ó¶Ë¿Ú
+    # RedisæœåŠ¡å™¨è¿æ¥ç«¯å£
     port: 6379
-    # Redis·şÎñÆ÷Á¬½ÓÃÜÂë£¨Ä¬ÈÏÎª¿Õ£©
+    # RedisæœåŠ¡å™¨è¿æ¥å¯†ç ï¼ˆé»˜è®¤ä¸ºç©ºï¼‰
     password:
     jedis:
       pool:
-        # Á¬½Ó³Ø×î´óÁ¬½ÓÊı£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓĞÏŞÖÆ£©
+        # è¿æ¥æ± æœ€å¤§è¿æ¥æ•°ï¼ˆä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ²¡æœ‰é™åˆ¶ï¼‰
         max-active: 8
-        # Á¬½Ó³Ø×î´ó×èÈûµÈ´ıÊ±¼ä£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓĞÏŞÖÆ£©
+        # è¿æ¥æ± æœ€å¤§é˜»å¡ç­‰å¾…æ—¶é—´ï¼ˆä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ²¡æœ‰é™åˆ¶ï¼‰
         max-wait: -1
-        # Á¬½Ó³ØÖĞµÄ×î´ó¿ÕÏĞÁ¬½Ó
+        # è¿æ¥æ± ä¸­çš„æœ€å¤§ç©ºé—²è¿æ¥
         max-idle: 8
-        # Á¬½Ó³ØÖĞµÄ×îĞ¡¿ÕÏĞÁ¬½Ó
+        # è¿æ¥æ± ä¸­çš„æœ€å°ç©ºé—²è¿æ¥
         min-idle: 0
-    # Á¬½Ó³¬Ê±Ê±¼ä£¨ºÁÃë£©
+    # è¿æ¥è¶…æ—¶æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
     timeout: 5000
-
