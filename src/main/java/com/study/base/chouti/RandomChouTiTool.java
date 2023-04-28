@@ -21,7 +21,7 @@ public class RandomChouTiTool {
     private static JButton  aboutButton  = new JButton ("关于");
     private static JTextField jt = new JTextField(); //文件显示框
     private static JButton OpenButton = new JButton("选择文件");
-    private static JTextField jt2 = new JTextField(); //文本框 显示抽取名单
+    private static JTextPane jt2 = new  JTextPane(); //显示抽取名单
     private static JButton StartButton = new JButton("开始抽取");
     private static JButton BuhuiButton = new JButton("不会,添加复试");
     private static JButton FushiButton = new JButton("复试");
@@ -63,8 +63,6 @@ public class RandomChouTiTool {
         FushiNumTopicShow.setColumns(4);
         InitNumTopicShow.setText("0");
         FushiNumTopicShow.setText("0");
-
-        jt2.setHorizontalAlignment(JTextField.CENTER);
 
         jc.addItem("是");
         jc.addItem("否");
@@ -196,11 +194,11 @@ public class RandomChouTiTool {
             public void actionPerformed(ActionEvent e) {
                 if (!initflag) {
                     alertMsg("请先进行初试！");
-                } else if ("恭喜你，所有题目均已答完！！！".equals(jt2.getText())) {
+                } else if ((null == initTopicList || initTopicList.isEmpty()) && !fushiflag) {
                     alertMsg("所有初试题目均已答完，可选择进行复试答题！");
-                } else if (initflag && fushiflag) {
+                } else if (fushiflag) {
                     alertMsg("初试已完成，正在进行复试中，请继续复试！");
-                } else if (StringUtils.isBlank(showTopic)) {
+                } else if (StringUtils.isBlank(showTopic) && (null != initTopicList && !initTopicList.isEmpty())) {
                     alertMsg("请先选择初试试题！");
                 } else {
                     //加入到复习题目中
