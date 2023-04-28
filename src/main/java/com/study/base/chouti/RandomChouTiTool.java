@@ -18,7 +18,8 @@ import java.util.Stack;
 public class RandomChouTiTool {
 
     private static JLabel jl = new JLabel("文件：");
-    private static JTextField jt = new JTextField();
+    private static JButton  aboutButton  = new JButton ("关于");
+    private static JTextField jt = new JTextField(); //文件显示框
     private static JButton OpenButton = new JButton("选择文件");
     private static JTextField jt2 = new JTextField(); //文本框 显示抽取名单
     private static JButton StartButton = new JButton("开始抽取");
@@ -48,7 +49,7 @@ public class RandomChouTiTool {
         JFrame jf = new JFrame("随机抽题器");
         jf.setIconImage(new ImageIcon("Icon.jpg").getImage());
         Container c = jf.getContentPane();
-        c.setLayout(new GridLayout(7, 5, 30, 40));
+        c.setLayout(new GridLayout(5,5,10,10));
         OpenButton.setFocusPainted(false);
         StartButton.setFocusPainted(false);
         JPanel jp1 = new JPanel();
@@ -57,7 +58,7 @@ public class RandomChouTiTool {
         JPanel jp4 = new JPanel();//添加面板
         JPanel jp5 = new JPanel();//添加面板
         jt.setColumns(10);
-        InitNumTopicShow.setColumns(6);
+        InitNumTopicShow.setColumns(4);
         FushiNumTopicShow.setColumns(4);
         InitNumTopicShow.setText("0");
         FushiNumTopicShow.setText("0");
@@ -67,6 +68,7 @@ public class RandomChouTiTool {
         jp1.add(jl);
         jp1.add(jt);
         jp1.add(OpenButton);
+        jp1.add(aboutButton);
         jp2.add(jt2, BorderLayout.CENTER);
         jp3.add(InitNumTopic);
         jp3.add(InitNumTopicShow);
@@ -87,6 +89,7 @@ public class RandomChouTiTool {
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getOpenButton();
         getSrartButton();
+        getAboutButton();
         getBuhuiButton();
         getFushiButton();
 
@@ -262,6 +265,14 @@ public class RandomChouTiTool {
     private void numChange() {
         InitNumTopicShow.setText(initTopicList.size() + "");
         FushiNumTopicShow.setText(topicedList.size() + "");
+    }
+
+    private void getAboutButton() {
+        aboutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                alertMsg("可建立txt文件:\n一行一个题目");
+            }
+        });
     }
 
     private void getjcomboBox() {
