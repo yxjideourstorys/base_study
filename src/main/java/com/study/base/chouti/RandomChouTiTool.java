@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class RandomChouTiTool {
 
@@ -41,11 +42,13 @@ public class RandomChouTiTool {
     private static JLabel jl2 = new JLabel("复试答题是否循环(默认循环)：");
     private static JComboBox jc = new JComboBox();//下拉列表框
 
+    private static Stack stack = new Stack<>();
+
     private void windows() {
         JFrame jf = new JFrame("随机抽题器");
         jf.setIconImage(new ImageIcon("Icon.jpg").getImage());
         Container c = jf.getContentPane();
-        c.setLayout(new GridLayout(5, 5, 30, 40));
+        c.setLayout(new GridLayout(7, 5, 30, 40));
         OpenButton.setFocusPainted(false);
         StartButton.setFocusPainted(false);
         JPanel jp1 = new JPanel();
@@ -219,9 +222,17 @@ public class RandomChouTiTool {
                         }
 
                         int showFushiNum = (int) (Math.random() * topicedList.size());
-                        String showTopic = topicedList.get(showFushiNum);
+                        System.out.println("处理前：" + showFushiNum);
+                        if (!stack.empty() && topicedList.size() >= 2){
+                            showFushiNum = duplicated((int) stack.pop(), showFushiNum);
+                        }
+                        System.out.println("处理后：" + showFushiNum);
+
+
+                        String topic = topicedList.get(showFushiNum);
                         //设置页面显示
-                        jt2.setText(showTopic);
+                        jt2.setText(topic);
+                        stack.push(showFushiNum);
 
                         if (fushiCirculateNumber == 2) {
                             //从复试数据中删除掉
@@ -233,6 +244,15 @@ public class RandomChouTiTool {
                 }
             }
         });
+    }
+
+    private int duplicated(int stackValue, int value){
+        if (stackValue != value){
+            return value;
+        }
+        value = (int) (Math.random() * topicedList.size());
+
+        return duplicated(stackValue, value);
     }
 
     private void alertMsg(String msg) {
