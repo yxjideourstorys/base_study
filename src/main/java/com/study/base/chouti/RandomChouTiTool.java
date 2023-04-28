@@ -57,14 +57,18 @@ public class RandomChouTiTool {
         JPanel jp3 = new JPanel();
         JPanel jp4 = new JPanel();//添加面板
         JPanel jp5 = new JPanel();//添加面板
+
         jt.setColumns(10);
         InitNumTopicShow.setColumns(4);
         FushiNumTopicShow.setColumns(4);
         InitNumTopicShow.setText("0");
         FushiNumTopicShow.setText("0");
+
         jt2.setHorizontalAlignment(JTextField.CENTER);
+
         jc.addItem("是");
         jc.addItem("否");
+
         jp1.add(jl);
         jp1.add(jt);
         jp1.add(OpenButton);
@@ -84,9 +88,17 @@ public class RandomChouTiTool {
         c.add(jp3);
         c.add(jp4);
         c.add(jp5);
+
         jf.setVisible(true);
-        jf.setBounds(1000, 300, 600, 600);
+        // 得到显示器屏幕的宽高
+        int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int height = Toolkit.getDefaultToolkit().getScreenSize().height;
+        // 定义窗体的宽高
+        int windowsWedth = 600;
+        int windowsHeight = 600;
+        jf.setBounds((width - windowsWedth) / 2, (height - windowsHeight) / 2, windowsWedth, windowsHeight);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         getOpenButton();
         getSrartButton();
         getAboutButton();
