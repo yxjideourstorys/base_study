@@ -1,4 +1,4 @@
-package com.study.base.singleton;
+package com.study.base.design_pattern.singleton;
 
 /**
  * 懒汉式-线程不安全
